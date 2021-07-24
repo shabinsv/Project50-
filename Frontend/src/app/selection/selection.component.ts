@@ -25,9 +25,11 @@ export class SelectionComponent implements OnInit {
     this.router.navigate(["user/template3"]);
   }
   generatelink(){
+    alert('Successfully send link in email.....')
     this.temp.getlink(this.ID2).subscribe((data)=>{
-    
+     
     })
+    
   }
 
 }
