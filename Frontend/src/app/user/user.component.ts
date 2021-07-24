@@ -15,9 +15,6 @@ export class UserComponent implements OnInit {
   constructor(private router:Router,public form:FormService,public check:UserService) { }
 
   ngOnInit(): void {
-     this.form.check(this.ID2);
-     this.check.LoggedIn();
- 
   }
   create(){
      this.router.navigate(['user/form1']);
@@ -31,9 +28,9 @@ export class UserComponent implements OnInit {
   delete(){
       this.form.deletedata(this.ID2)
       .subscribe((res:any) => {
-        this.form.check(this.ID2);
+        this.check.check(this.ID2);
         this.check.LoggedIn();
-        alert(res.data);
+       
       })
       this.router.navigate(['user']);
   }

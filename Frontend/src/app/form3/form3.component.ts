@@ -17,6 +17,7 @@ export class Form3Component implements OnInit {
    
   }
   insert(){
+    
     this.http.Resumedata.job.push({jobname:"", companyname:"", jobyear:"",jobdes:""});
   }
 

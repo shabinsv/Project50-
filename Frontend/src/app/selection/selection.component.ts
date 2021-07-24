@@ -14,6 +14,8 @@ export class SelectionComponent implements OnInit {
   constructor(public router:Router,public check:UserService,public temp:TemplateService) { }
 
   ngOnInit(): void {
+    this.check.check(this.ID2);
+        this.check.LoggedIn();
   }
   temp1(){
     this.router.navigate([`user/template1/${this.ID2}`]);

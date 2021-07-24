@@ -1,4 +1,5 @@
 import { HttpClient } from '@angular/common/http';
+import { newArray } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -44,12 +45,13 @@ export class FormService {
   constructor(private http:HttpClient) { }
 
   form1(form:any){
-    return this.http.post("http://localhost:3000/form1",form)
-    .subscribe(data=>{console.log(data)})
+    return this.http.post("http://localhost:3000/form1",form);
+    
+    
   }
   image(image:any){
     return this.http.post("http://localhost:3000/image/"+this.ID2,image)
-    .subscribe(data=>{console.log(data)})
+    .subscribe(data=>{console.log(data)});
   }
   usercvdata(id:any){
     return this.http.get("http://localhost:3000/usercvdata/"+id);
@@ -58,20 +60,9 @@ export class FormService {
   {
     console.log('client update')
     return this.http.put("http://localhost:3000/updateform",form)
-    .subscribe(data =>{console.log(data)})
+    .subscribe(data =>{console.log(data)});
   }
-  check(data:any){
-      this.http.get("http://localhost:3000/check/"+data).subscribe(res=>{
-      if(res){
-        var x="checked";
-        localStorage.setItem('check',x);
-      }
-      else{
-        localStorage.removeItem('check');
-      }
-     })
-
-  }
+  
   deletedata(id:any){
     return this.http.delete("http://localhost:3000/deletedata/"+id);
   }

@@ -160,6 +160,7 @@ app.post("/form1",function(req,res){
    } 
    var resume=new Resumedata(resume);
    resume.save();
+   res.send({data:'ok'});
 });
 
 app.get("/usercvdata/:id",function(req,res){

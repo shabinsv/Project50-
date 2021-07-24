@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormService } from '../form.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-form5',
@@ -8,11 +9,13 @@ import { FormService } from '../form.service';
   styleUrls: ['./form5.component.css']
 })
 export class Form5Component implements OnInit {
+ 
   
   selectedimage:any =null;
-  constructor(public http:FormService,private router:Router) { }
+  constructor(public http:FormService,private router:Router,private form:UserService) { }
 
   ngOnInit(): void {
+    
   }
   selectImage(event:any){
     this.selectedimage =event.target.files[0];

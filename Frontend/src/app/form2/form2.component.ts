@@ -16,6 +16,7 @@ constructor(public http:FormService,private router:Router) { }
     this.router.navigate(['user/form3']);
   }
   insert(){
+  
     this.http.Resumedata.education.push({degree:"",specialisation:"",year: "",name:""});
   }
 }

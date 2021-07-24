@@ -12,6 +12,19 @@ export class UserService {
   signup(user:any){
     return this.http.post<any>("http://localhost:3000/signup",user)
   }
+  check(data:any){
+    this.http.get("http://localhost:3000/check/"+data).subscribe(res=>{
+    if(res){
+      var x="checked";
+      localStorage.setItem('check',x);
+    }
+    else{
+      localStorage.removeItem('check');
+    }
+   })
+
+}
+
   LoggedIn(){
     var x=localStorage.getItem('check')
     if(x=='checked'){
