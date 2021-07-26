@@ -38,12 +38,12 @@ children:[{path:'',component:SelectionComponent},
 {path:'updateform2',component:Updateform2Component},
 {path:'updateform3',component:Updateform3Component},
 {path:'updateform4',component:Updateform4Component},
-{path:'template2',component:Template2Component},
-{path:'template3',component:Template3Component}]},
+{path:'template2/:userID',component:Template2Component},
+{path:'template3/:userID',component:Template3Component}]},
 {path:'admin',component:AdminComponent},
 {path:'template1/:userID',component:Template1Component},
-{path:'template2',component:Template2Component},
-{path:'template3',component:Template3Component}
+{path:'template2/:userID',component:Template2Component},
+{path:'template3/:userID',component:Template3Component}
 ];
 
 @NgModule({

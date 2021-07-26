@@ -35,7 +35,7 @@ export class Template1Component implements OnInit {
   ngOnInit(): void {
     this.router.params.subscribe(params => {
     let userdata = params.userID;
-    this.http.usercvdata(userdata).subscribe((data)=>{
+    this.http.data(userdata).subscribe((data)=>{
       this.Resumedata=JSON.parse(JSON.stringify(data));
     })
   })

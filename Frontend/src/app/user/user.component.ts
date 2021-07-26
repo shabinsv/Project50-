@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormService } from '../form.service';
 import { Template1Component } from '../template1/template1.component';
 import { UserService } from '../user.service';
+import Swal from 'sweetalert2'
+
 
 @Component({
   selector: 'app-user',
@@ -26,14 +28,46 @@ export class UserComponent implements OnInit {
     this.router.navigate(['user/form5']);
   }
   delete(){
-      this.form.deletedata(this.ID2)
+       
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this imaginary file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it Permanently!',
+      cancelButtonText: 'No, keep it in Draft'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted Permanently!',
+          'Your Resumedata deleted.',
+          'error'
+          )
+          this.form.deletedata(this.ID2)
+          .subscribe((res:any) => {
+            this.check.check(this.ID2);
+      this.check.LoggedIn();
+     this.router.navigate(['user']);
+          })
+          
+      
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire(
+          'Drafted',
+          'Your Resumedata drafted :)',
+          'success'
+        )
+        this.form.draft(this.ID2)
       .subscribe((res:any) => {
         this.check.check(this.ID2);
-        this.check.LoggedIn();
-       
-      })
+      this.check.LoggedIn();
       this.router.navigate(['user']);
-  }
+         })
+         
+      }
+      })
+      
+}
   home(){
     this.router.navigate(['user']);
   }

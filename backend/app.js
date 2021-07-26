@@ -2,6 +2,7 @@ const express=require("express");
 const port=process.env.PORT || 3000;
 const Userdata=require("./src/model/Userdata");
 const Resumedata=require("./src/model/Resumedata");
+const Draftdata=require("./src/model/Draftdata");
 const cors=require('cors');
 var jwt = require('jsonwebtoken');
 var bodyparser=require('body-parser');
@@ -218,11 +219,12 @@ app.delete("/deletedata/:id",(req,res)=>{
   });
 });
 
-app.get("/getlink/:id",function(req,res){
+app.get("/getlink/:id/:cvid",function(req,res){
   const id = req.params.id; 
+  const cvid = req.params.cvid;
  Userdata.findById({"_id":id})
   .then((data)=>{
-       var link=`http://localhost:4200/template1/${id}`
+       var link=`http://localhost:4200/template1/${cvid}`
     var transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -248,60 +250,106 @@ app.get("/getlink/:id",function(req,res){
 });
 
 
-
-
-
-
-
-app.get("/authors",function(req,res){
-      Authordata.find()
-      .then(function(authors){
-        res.send(authors);
-      });
-    });
-
-    app.post("/addauthor",verifyToken,function(req,res){
-      console.log(req.body);
-      var author={
-       title :req.body.author.title,
-       about :req.body.author.about,
-       image :req.body.author.image,
-      } 
-      var author=new Authordata(author);
-      author.save();
- });
- app.get("/author/:id",function(req,res){
-      const id = req.params.id; 
-      Authordata.findOne({"_id":id})
-      .then((author)=>{
-         res.send(author);
+app.get("/data/:id",function(req,res){
+  const id = req.params.id; 
+ Resumedata.findById({"_id":id})
+  .then((cvdata)=>{
+    if(cvdata ==null){
+      Draftdata.findOne({"draftID":id}).then((data)=>{
+        res.send(data);
       })
-    });
-
-    app.put('/updateauthor',verifyToken,(req,res)=>{
-      id=req.body._id,
-      title= req.body.title,
-      about = req.body.about,
-      image = req.body.image,
-     Authordata.findByIdAndUpdate({"_id":id},
-                                  {$set:{"title":title,
-                                  "about":about,
-                                  "image":image
-                              }})
-     .then(function(){
-         res.send();
-     });
-   });
-
-   app.delete("/deleteauthor/:id",verifyToken,(req,res)=>{
-   
-      id = req.params.id;
-      Authordata.findByIdAndDelete({"_id":id})
-      .then(()=>{
-          console.log('success')
-          res.send();
-      });
+    }
+    else{
+      res.send(cvdata);
+    }
+     
+  }).catch(()=>{
+    Draftdata.findOne({"draftID":id}).then((data)=>{
+      res.send(data);
+    })
+  })
 });
+
+
+app.get("/draftdata/:id",(req,res)=>{
+   
+  id = req.params.id;
+  Resumedata.findOne({"ID":id})
+  .then((data)=>{
+      console.log(data)
+      var resume={
+        draftID:data._id,
+        ID:data.ID,
+        name:data.name,
+        email:data.email,
+        phonenumber:data.phonenumber,
+        dob:data.dob,
+        gender:data.gender,
+        address:data.address,
+        about:data.about,
+        photo:data.photo,
+        education:data.education,
+        job:data.job,
+        skills:data.skills,
+        achievements:data.achievements,
+        languages:data.languages
+       } 
+       var resume=new Draftdata(resume);
+   resume.save();
+   Resumedata.findByIdAndDelete({"_id":data._id})
+  .then(()=>{
+      console.log('success')
+      res.send({data:"Resume drafted"});
+  });
+   
+  });
+});
+
+app.get("/loaddraftdata/:id",(req,res)=>{
+   
+  id = req.params.id;
+  Draftdata.find({"ID":id})
+  .then((data)=>{
+     res.send(data);
+     console.log(data);
+  });
+});
+
+app.get("/changeuserdata/:id",(req,res)=>{
+   
+  id = req.params.id;
+  Draftdata.findOne({"draftID":id})
+  .then((data)=>{
+      console.log(data)
+      var resume={
+        ID:data.ID,
+        name:data.name,
+        email:data.email,
+        phonenumber:data.phonenumber,
+        dob:data.dob,
+        gender:data.gender,
+        address:data.address,
+        about:data.about,
+        photo:data.photo,
+        education:data.education,
+        job:data.job,
+        skills:data.skills,
+        achievements:data.achievements,
+        languages:data.languages
+       } 
+       var resume=new Resumedata(resume);
+   resume.save();
+   Draftdata.findOneAndDelete({"draftID":id})
+  .then(()=>{
+      console.log('success')
+      res.send({data:"Resume drafted"});
+  });
+   
+  });
+});
+
+
+
 
 
 app.listen(port,function(){

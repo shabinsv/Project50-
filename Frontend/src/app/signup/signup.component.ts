@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../user.service';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-signup',
@@ -19,6 +20,7 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
   }
   signupUser(){
+    
     this.http.signup(this.user)
     .subscribe(function(){
       console.log("account added");

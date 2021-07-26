@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TemplateService {
+  ID2=localStorage.getItem("UserId");
   Resumedata={
     ID:"",
     name:"",
@@ -26,11 +27,11 @@ export class TemplateService {
 
   constructor(private http:HttpClient) { }
 
-  usercvdata(id:any){
-    return this.http.get("http://localhost:3000/usercvdata/"+id);
+  data(id:any){
+    return this.http.get("http://localhost:3000/data/"+id);
   }
 
   getlink(id:any){
-    return this.http.get("http://localhost:3000/getlink/"+id);
+    return this.http.get(`http://localhost:3000/getlink/${this.ID2}/`+id);
   }
 }

@@ -52,6 +52,12 @@ export class Form4Component implements OnInit {
   insert2(){
     this.http.Resumedata.languages.push({language:""});
   }
+  del(i){
+    this.http.Resumedata.skills.splice(i, 1); 
+  }
+  del2(i){
+    this.http.Resumedata.languages.splice(i, 1); 
+  }
 
 
 }

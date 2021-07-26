@@ -21,6 +21,7 @@
   </label>
   <div class="controls">
     <input  type="text" placeholder="Enter Skills" class="input-xlarge" type="text" name="skill" [(ngModel)]="i.skill">
+    <button class="btn btn-danger" type="button" (click)="del(i)">Remove</button>
 
   </div>
 </div>
@@ -53,6 +54,7 @@
   <div class="controls">                     
     
     <input type="text" id="lang" name="lang"placeholder="Enter your knwon languages" [(ngModel)]="i.language">
+    <button class="btn btn-danger" type="button" (click)="del2(i)">Remove</button>
   </div>
 </div>
 </div>

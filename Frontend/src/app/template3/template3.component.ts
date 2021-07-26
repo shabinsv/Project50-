@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TemplateService } from '../template.service';
 import  jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-template3',
@@ -26,13 +27,15 @@ export class Template3Component implements OnInit {
     
     }
 
-  constructor(public http:TemplateService) { }
+  constructor(public http:TemplateService,private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    let userdata = localStorage.getItem("UserId");
-      this.http.usercvdata(userdata).subscribe((data)=>{
+    this.router.params.subscribe(params => {
+      let userdata = params.userID;
+      this.http.data(userdata).subscribe((data)=>{
         this.Resumedata=JSON.parse(JSON.stringify(data));
       })
+    })
   }
   public generatePdf()  
  
