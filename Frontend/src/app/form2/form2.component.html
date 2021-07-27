@@ -10,10 +10,10 @@
 
 <!-- Form Name -->
 <legend>Education Details</legend>
-<div *ngFor="let i of http.Resumedata.education">
+<div *ngFor="let i of http.Resumedata.education; let j=index">
 <div class="control-group">
   <label class="control-label" for="choose">Choose A Degree</label>
-  <select class="control-label" placeholder="Degree" name="degree" [(ngModel)]="i.degree">
+  <select class="control-label" placeholder="Degree" name="degree{{j}}" [(ngModel)]="i.degree">
     <option>Bachelor’s Degree</option>
     <option>Master’s Degree</option>
     <option>Doctoral Degree</option>
@@ -23,7 +23,7 @@
 <div class="control-group">
   <label class="control-label" for="mobile">Specialisation</label>
   <div class="controls">
-    <input id="mobile" name="mobile" placeholder="Enter Your Degree Name" class="input-xlarge" type="text" [(ngModel)]="i.specialisation">
+    <input id="mobile" name="mobile{{j}}" placeholder="Enter Your Degree Name" class="input-xlarge" type="text" [(ngModel)]="i.specialisation">
     
   </div>
 </div>
@@ -31,7 +31,7 @@
 <div class="control-group">
   <label class="control-label" for="mobile">Passout Year</label>
   <div class="controls">
-    <input  type="number" name="year"placeholder="Enter Passout Year" class="input-xlarge" type="text" [(ngModel)]="i.year">
+    <input  type="number" name="year{{j}}"placeholder="Enter Passout Year" class="input-xlarge" type="text" [(ngModel)]="i.year">
     
   </div>
 </div>
@@ -40,7 +40,7 @@
 <div class="control-group">
   <label class="control-label" for="mobile">Institution Name</label>
   <div class="controls">
-    <input id="college"  placeholder="Enter College/University" class="input-xlarge" type="text" name="name" [(ngModel)]="i.name">
+    <input id="college"  placeholder="Enter College/University" class="input-xlarge" type="text" name="name{{j}}" [(ngModel)]="i.name">
     <button class="btn btn-danger" type="button" (click)="del(i)">Remove</button>
     
   </div>

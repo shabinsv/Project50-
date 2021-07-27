@@ -12,11 +12,11 @@
 <legend>Work Experience</legend>
 
 <!-- Text input-->
-<div *ngFor="let i of http.Resumedata.job">
+<div *ngFor="let i of http.Resumedata.job;let j=index">
 <div class="control-group">
   <label class="control-label" for="full_name">Job <Title></Title></label>
   <div class="controls">
-    <input id="job" placeholder="Enter your Job Title" class="input-xlarge" type="text" name="job"  [(ngModel)]="i.jobname">
+    <input id="job" placeholder="Enter your Job Title" class="input-xlarge" type="text" name="job{{j}}"  [(ngModel)]="i.jobname">
     
   </div>
 </div>
@@ -25,7 +25,7 @@
 <div class="control-group">
   <label class="control-label" for="email">Organization Name</label>
   <div class="controls">
-    <input id="organisation"  placeholder="Enter Your Organisation name" class="input-xlarge" type="text" name="name"  [(ngModel)]="i.companyname">
+    <input id="organisation"  placeholder="Enter Your Organisation name" class="input-xlarge" type="text" name="name{{j}}"  [(ngModel)]="i.companyname">
     
   </div>
 </div>
@@ -34,7 +34,7 @@
 <div class="control-group">
   <label class="control-label" for="ex-year">Experience in Year</label>
   <div class="controls">
-    <input id="exp-year"  placeholder="Enter Your Experience in Year" class="input-xlarge" type="text" name="jobyear"  [(ngModel)]="i.jobyear">
+    <input id="exp-year"  placeholder="Enter Your Experience in Year" class="input-xlarge" type="text" name="jobyear{{j}}"  [(ngModel)]="i.jobyear">
     
   </div>
 </div>
@@ -45,7 +45,7 @@
 <div class="control-group">
   <label class="control-label" for="Description">Job Description</label>
   <div class="controls">                     
-    <textarea id="Address" name="Description"  [(ngModel)]="i.jobdes">Description</textarea>
+    <textarea id="Address" name="Description{{j}}"  [(ngModel)]="i.jobdes">Description</textarea>
     <button class="btn btn-danger" type="button" (click)="del(i)">Remove</button>
   </div>
 </div>
