@@ -14,13 +14,13 @@
 <!--Button -->
 
 <!-- Text input-->
-<div *ngFor="let i of http.Updatedata.skills">
+<div *ngFor="let i of http.Updatedata.skills;let j=index">
 <div class="control-group">
   <label class="control-label" for="skills">
     Skills
   </label>
   <div class="controls">
-    <input  type="text" placeholder="Enter Skills" class="input-xlarge" type="text" name="skill" [(ngModel)]="i.skill">
+    <input  type="text" placeholder="Enter Skills" class="input-xlarge" type="text" name="skill{{j}}" [(ngModel)]="i.skill">
 
   </div>
 </div>
@@ -47,13 +47,14 @@
 
 
 <!-- Text input-->
-<div *ngFor="let i of http.Updatedata.languages">
+<div *ngFor="let i of http.Updatedata.languages;let j=index">
 <div class="control-group">
   <label class="control-label" for="lang">Known Languages</label>
   <div class="controls">                     
     
-    <input type="text" id="lang" name="lang"placeholder="Enter your knwon languages" [(ngModel)]="i.language">
+    <input type="text" id="lang" name="lang{{j}}"placeholder="Enter your knwon languages" [(ngModel)]="i.language">
   </div>
+  
 </div>
 </div>
 
